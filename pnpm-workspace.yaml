@@ -1,0 +1,5 @@
+overrides:
+  rollup: 4.64.9
+
+allowBuilds:
+  esbuild@0.25.12: true
