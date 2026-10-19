@@ -34,9 +34,11 @@ Deployment reference: [Vite GitHub Pages guide](https://vite.dev/guide/static-de
 
 - [Badge and lanyard](public/templates/badge-templates.zip): 54 × 85.6 mm badge, 20 × 900 mm unfolded lanyard.
 - [A6 postcard](public/templates/postcard-templates.zip): 148 × 105 mm.
-- [Button pin](public/templates/pin-templates.zip): 58 mm face, supplier-specific 70 mm cut.
+- [Button pin](public/templates/pin-templates.zip): seven aviation designs, 58 mm face, supplier-specific 70 mm cut. Blank artboards are excluded from the gallery.
 
 Each ZIP includes native Illustrator artwork and export instructions. Upload clean finished-size PNG, JPEG, WebP or SVG files. AI files must be exported first.
+
+Badge, lanyard and aviation pin artwork is exported from the author's updated Designs masters. Original AI bytes are retained in the downloads; clean SVGs have outlined lettering and no guides. Saved built-in examples refresh with each artwork release while personal uploads and customizations stay intact.
 
 ## Storage
 
