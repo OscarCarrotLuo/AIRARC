@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Download, RotateCcw, FlipHorizontal2, X, Upload, Check, SlidersHorizontal, Trash2, Copy, LoaderCircle } from 'lucide-react';
 import Lanyard from './components/Lanyard.jsx';
 import PrintObject from './components/PrintObject.jsx';
+import ObjectTypeSelect from './components/ObjectTypeSelect.jsx';
 import { PRODUCTS, MAX_PER_TYPE, exampleFor, normalizeCollection } from './catalog.js';
 import { readArtwork, readCollection, saveCollection } from './storage.js';
 import { publicAsset } from './assets.js';
@@ -59,7 +60,7 @@ export default function App() {
   useEffect(() => {
     const onKey = e => {
       if (e.key === 'Escape' && inspector) { setInspector(false); settingsButton.current?.focus(); return; }
-      if (e.ctrlKey || e.metaKey || e.altKey || /INPUT|TEXTAREA|SELECT/.test(e.target.tagName) || e.target.closest('.lanyard, .print-object')) return;
+      if (e.ctrlKey || e.metaKey || e.altKey || /INPUT|TEXTAREA|SELECT/.test(e.target.tagName) || e.target.closest('.lanyard, .print-object, .product-picker')) return;
       if (e.key.toLowerCase() === 'f' || e.key.toLowerCase() === 'r') { e.preventDefault(); command(e.key.toLowerCase() === 'f' ? 'flip' : 'reset'); }
     };
     document.addEventListener('keydown', onKey); return () => document.removeEventListener('keydown', onKey);
@@ -123,7 +124,7 @@ export default function App() {
       <div className="collection-strip" aria-label="Collection">{collection.map(b => <button key={b.id} className={`badge-thumb thumb-${b.type} ${b.id === current.id ? 'selected' : ''}`} aria-label={`Select ${b.name}`} title={b.name} aria-pressed={b.id === current.id} onClick={() => select(b.id)}>{type === 'lanyard' && <span className="mini-ribbon" style={{ background: b.color }}/>}<img src={b.front} alt=""/></button>)}</div>
       <div className="dock-controls">
         <div className="file-actions">
-          <select className="product-select" aria-label="Object type" title={`${product.label} · ${product.size}`} value={type} disabled={!ready} onChange={e => selectType(e.target.value)}>{Object.entries(PRODUCTS).map(([key, value]) => <option key={key} value={key}>{value.label}</option>)}</select>
+          <ObjectTypeSelect value={type} disabled={!ready} onChange={selectType}/>
           <a className="icon-button" href={product.template} download aria-label={`Download ${product.label.toLowerCase()} templates`} title={`Download ${product.label.toLowerCase()} templates`}><Download size={18}/></a>
           <label className={`upload-button ${busy || !ready || collection.length >= MAX_PER_TYPE ? 'disabled' : ''}`} title={`Create ${product.label.toLowerCase()} from image`}>
             {busy ? <LoaderCircle size={18} className="spin"/> : <Upload size={18}/>}

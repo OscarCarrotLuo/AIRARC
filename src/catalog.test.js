@@ -22,3 +22,15 @@ test('invalid records cannot leave a category without a usable object', () => {
   assert.deepEqual(result.map(item => item.type), Object.keys(PRODUCTS));
   assert.ok(result.every(item => item.front && item.name));
 });
+
+test('new postcard artwork refreshes saved defaults while preserving uploaded faces', () => {
+  const saved = [
+    { id: 'example', type: 'postcard', front: '/AIRARC/artwork/postcard-front.svg', back: '/artwork/postcard-back.svg?v=old' },
+    { id: 'custom', type: 'postcard', front: 'data:image/png;base64,custom', back: 'data:image/png;base64,back' }
+  ];
+  const result = normalizeCollection(saved);
+  assert.equal(result[0].front, PRODUCTS.postcard.front);
+  assert.equal(result[0].back, PRODUCTS.postcard.back);
+  assert.deepEqual(result[1], saved[1]);
+  assert.deepEqual(normalizeCollection(result), result);
+});
